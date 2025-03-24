@@ -1,0 +1,101 @@
+<div class="add-product-container" *ngIf="user_type === 'admin'">
+    <button class="toggle-button" (click)="toggleForm()">
+      {{ isFormVisible ? 'Hide Add Product' : 'Add New Product' }}
+    </button>
+  
+    <div *ngIf="isFormVisible" class="collapsible-content">
+      <h2>Add New Product</h2>
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input id="productName" formControlName="productName" type="text" class="form-control" />
+          <div *ngIf="productName?.invalid && productName?.touched" class="error-message">
+            Product Name is required.
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="productDescription">Product Description</label>
+          <textarea id="productDescription" formControlName="productDescription" class="form-control"></textarea>
+          <div *ngIf="productDescription?.invalid && productDescription?.touched" class="error-message">
+            Product Description is required.
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="categoryId">Category ID</label>
+          <input id="categoryId" formControlName="categoryId" type="number" class="form-control" />
+          <div *ngIf="categoryId?.invalid && categoryId?.touched" class="error-message">
+            Category ID is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="productPrice">Product Price (in Euros)</label>
+          <textarea id="productPrice" formControlName="productPrice" class="form-control"></textarea>
+          <div *ngIf="productPrice?.invalid && productPrice?.touched" class="error-message">
+            Product Price is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="availability">Availability</label>
+          <input id="availability" formControlName="availability" type="number" class="form-control" />
+          <div *ngIf="availability?.invalid && availability?.touched" class="error-message">
+            Availability is required.
+          </div>
+        </div>
+  
+        <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Add Product</button>
+      </form>
+    </div>
+  </div>
+  
+  
+    <div class="products-container">
+  
+      <h2 *ngIf="user_type === 'admin'" >Manage Products</h2>
+      <h2 *ngIf="user_type === 'customer'" >Products</h2>
+      <div *ngIf="products && products.length > 0; else noProducts">
+  
+      <table>
+        <div class="product-grid-container">
+          <div class="product-card" *ngFor="let product of products">
+            <img
+              src="images/kidsshoes.jpeg"
+              alt="{{ product.product_name }}"
+              class="product-image"
+            >
+            <div class="product-info">
+              <h3 class="product-name">
+                <input [(ngModel)]="product.product_name" placeholder="Product Name" />
+              </h3>
+              <p class="product-description">
+                <textarea [(ngModel)]="product.product_description" placeholder="Description"></textarea>
+              </p>
+              <p class="product-availability" *ngIf="user_type === 'admin'">
+                Availability: <input [(ngModel)]="product.availability" placeholder="Availability" />
+              </p>
+              <p class="product-availability">
+                Price(in Euros): <input [(ngModel)]="product.product_price" placeholder="Price" />
+              </p>
+            </div>
+            <div class="product-actions" *ngIf="user_type === 'admin'">
+              <button class="btn btn-primary" (click)="modifyProduct(product.product_id, product)">Modify</button>
+              <button class="btn btn-danger" (click)="deleteProduct(product.product_id)">Delete</button>
+            </div>
+            <button
+            class="btn btn-success"
+            [disabled]="product.availability <= 0"
+            (click)="addToCart(product.product_id, product.category_id)">
+            {{ product.availability > 0 ? 'Add to Cart' : 'Out of Stock' }}
+          </button>
+          </div>
+        </div>
+      </table>
+      </div>
+  
+      <ng-template #noProducts>
+        <p>No products currently available. Contact admin to add more products.</p>
+      </ng-template>
+  
+    </div>
+  

@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+html { background-color: white; }  
+ 
+
+.header {
+    display: flex;
+    align-items: center; /* Align vertically in the center */
+    justify-content: center; /* Center content horizontally */
+    gap: 10px; /* Add space between the h1 and image */
+  }
+  
+  .memo {
+    //font-size: 2rem; /* Adjust text size */
+    //margin: 0; /* Remove default margin */
+    color: darkgreen; 
+    text-align: center; 
+    font-size: 70px; 
+    
+  }
+  
+  .brand-ls {
+    width: 100px; /* Adjust image size */
+    height: 100px; /* Keep image square */
+    object-fit: cover; /* Ensure the image fits nicely */
+  }
+
+  

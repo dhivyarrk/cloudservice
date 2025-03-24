@@ -1,0 +1,126 @@
+/* General Styling */
+.contact {
+    max-width: 600px; /* Limit the width for larger screens */
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .contact h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .contact p {
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Form Styling */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%; /* Ensure fields take up the available width */
+  }
+  
+  input:focus,
+  textarea:focus {
+    border-color: #4caf50;
+    outline: none;
+    box-shadow: 0 0 3px rgba(76, 175, 80, 0.5);
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 120px; /* Better usability for messages */
+  }
+  
+  button {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    background-color: #4caf50;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Responsive Design */
+  
+  /* For tablets (768px and below) */
+  @media (max-width: 768px) {
+    .contact {
+      padding: 1rem;
+      margin: 1rem;
+    }
+  
+    .contact h1 {
+      font-size: 1.8rem;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    button {
+      font-size: 0.95rem;
+    }
+  }
+  
+  /* For mobile phones (480px and below) */
+  @media (max-width: 480px) {
+    .contact h1 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+  
+    .contact p {
+      font-size: 0.9rem;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      font-size: 0.85rem;
+      padding: 0.65rem;
+    }
+  
+    button {
+      font-size: 0.9rem;
+      padding: 0.6rem;
+    }
+  }
+  

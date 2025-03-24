@@ -1,0 +1,37 @@
+<div class="checkout">
+    <h2>Checkout</h2>
+    <div *ngIf="cartItems.length === 0">
+      <p>Your cart is empty. Please add items to the cart before proceeding.</p>
+    </div>
+
+    <div *ngIf="cartItems.length > 0">
+      <p><strong> Items in the cart </strong></p>
+
+      <div *ngFor="let item of cartItems">
+        <div>
+          Item:
+        </div>
+        <ul>
+          <li *ngFor="let key of objectKeys(item)">
+            {{ key }}: {{ item[key] }}
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="total">
+        <p><strong>Total: ${{ totalAmount }}</strong></p>
+      </div>
+<!--
+      <button (click)="checkout()" [disabled]="loading" class="btn btn-success">
+        <span *ngIf="loading">Processing...</span>
+        <span *ngIf="!loading">Complete Checkout</span>
+      </button>
+-->
+      <button routerLink="/dashboard/payment" class="btn btn-primary">Proceed to CHeckout</button>
+
+    </div>
+  </div>
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>

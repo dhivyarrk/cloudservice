@@ -1,0 +1,134 @@
+/* General Styling */
+.checkout {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .checkout h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .checkout p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+  
+  /* Cart Items */
+  .checkout .cart-items {
+    margin: 1rem 0;
+  }
+  
+  .cart-items div {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #444;
+  }
+  
+  .cart-items ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+  }
+  
+  .cart-items ul li {
+    padding: 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.95rem;
+  }
+  
+  /* Total Section */
+  .total {
+    margin: 1.5rem 0;
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Buttons */
+  button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #4caf50;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.btn-primary {
+    background-color: #007bff;
+  }
+  
+  button.btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Responsive Design */
+  
+  /* For tablets (768px and below) */
+  @media (max-width: 768px) {
+    .checkout {
+      padding: 1rem;
+    }
+  
+    .checkout h2 {
+      font-size: 1.8rem;
+    }
+  
+    .cart-items ul li {
+      font-size: 0.9rem;
+    }
+  
+    button {
+      font-size: 0.9rem;
+      padding: 0.6rem;
+    }
+  }
+  
+  /* For mobile phones (480px and below) */
+  @media (max-width: 480px) {
+    .checkout h2 {
+      font-size: 1.5rem;
+    }
+  
+    .cart-items div {
+      font-size: 0.9rem;
+    }
+  
+    .cart-items ul li {
+      font-size: 0.85rem;
+    }
+  
+    .total {
+      font-size: 1rem;
+    }
+  
+    button {
+      font-size: 0.85rem;
+      padding: 0.5rem;
+    }
+  }
+  

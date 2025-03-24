@@ -1,0 +1,26 @@
+<header class="navbar">
+  <h1>Welcome to Boo Boo!!</h1>
+
+    <div class="navbar__brand">
+      <h1><strong>User_name: {{ user_name }} </strong> </h1>
+    </div>
+    <nav class="navbar__menu">
+      
+      <ul class="navbar__items">
+        <!--
+        <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+        -->
+        <button routerLink="womenclothes" class="btn btn-primary">Women's Clothes</button>
+        <button routerLink="womensaccessories" class="btn btn-primary">Women's Accessories</button>
+        <button routerLink="kidsclothes" class="btn btn-primary">Kid's Clothes</button>
+        <button routerLink="kidsshoes" class="btn btn-primary">Kid's Shoe's</button>
+        <button routerLink="checkout" class="btn btn-primary">Checkout Cart</button>
+        <!-- <button routerLink="account" class="btn btn-primary">Account</button>-->
+        <button routerLink="contact" class="btn btn-primary">Contact</button>
+        <button (click)="logout()" class="btn btn-danger">Logout</button>
+      </ul>
+    </nav>
+  </header>
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>

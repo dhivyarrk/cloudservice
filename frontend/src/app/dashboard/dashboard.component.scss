@@ -1,0 +1,128 @@
+$primary-color: #4CAF50; // Green
+$text-color: #ffffff;
+$hover-color: #3e8e41;
+/* General Styling */
+h1 {
+  font-size: 50px;
+  align-self: center;
+  align-content: center;
+
+
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  flex-wrap: wrap; /* Allows wrapping on small screens */
+}
+
+.navbar__brand h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+
+.navbar__items li {
+  display: flex;
+  align-items: center;
+}
+.navbar__menu {
+  display: flex;
+  flex-wrap: wrap; /* Ensure items wrap to the next line if they overflow */
+  justify-content: center; /* Center items horizontally */
+  gap: 0.5rem; /* Space between items */
+  width: 100%; /* Use the full width of the container */
+  padding: 0.5rem; /* Add padding to avoid content touching edges */
+}
+
+.navbar__items {
+  display: flex;
+  flex-wrap: wrap; /* Wrap items within the menu */
+  justify-content: center; /* Center items within the menu */
+  width: 100%; /* Full width */
+  gap: 0.5rem; /* Space between items */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navbar__items a,
+.navbar__items button {
+  flex: 1 1 auto; /* Allow buttons to resize and fill available space */
+  text-align: center; /* Center-align the text */
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: blueviolet;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Handle danger button specifically */
+.navbar__items .btn-danger {
+  background-color: #dc3545;
+}
+
+.navbar__toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar__toggle:focus {
+  outline: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar__toggle {
+    display: block;
+  }
+  .navbar__menu {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap; /* Allows wrapping */
+    width: 100%;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .navbar__items {
+    flex-direction: column; /* Stack items vertically */
+    width: 100%; /* Full width */
+    gap: 0.5rem; /* Add space between buttons */
+  }
+
+  .navbar__items li {
+    width: 100%; /* Make list items take full width */
+  }
+
+  .navbar__items a,
+  .navbar__items button {
+    text-align: center; /* Center align text */
+    width: 100%; /* Full width buttons */
+    padding: 1rem;
+    border-radius: 5px; /* Maintain rounded corners */
+    font-size: 1rem; /* Ensure readable font size */
+  }
+
+  /* If buttons still overflow, allow scrolling */
+  .navbar__menu {
+    overflow-y: auto; /* Vertical scrolling for overflowing items */
+    max-height: 80vh; /* Limit menu height to 80% of the viewport */
+  }
+}

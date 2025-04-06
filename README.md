@@ -38,27 +38,38 @@ If you would like to run locally :
  1. Install postgres: 
  1.1 Install postgresql service 
 
+```
 sudo apt install postgresql 
+```
 
 1.2 start postgresql service 
 
+```
 sudo service postgresql start 
 sudo service postgresql status  
+```
 
 1.3 connect to postgresql as postgres default user: 
 
+```
 sudo -u postgres psql 
+```
 
 1.4 create user with password 
 
+```
 create user webstore_user with encrypted password '12345'; 
+```
 
 1.5 Create database 
 
+```
 create database webstore_database; 
+```
 
 1.6 Provide enough privileges for the user to access the database 
 
+```
 webstore_database=> set role postgres;  
 
 webstore_database=# grant all privileges on schema public to webstore_user;  
@@ -66,7 +77,7 @@ webstore_database=# grant all privileges on schema public to webstore_user;
 grant all privileges on database webstore_database to webstore_user;  
 
 grant all privileges on schema public to webstore_user;  
-
+```
  
 
 Inside the terminal: 
@@ -75,55 +86,65 @@ Inside the terminal:
 
  2.1 Clone the repository: 
 
-git clone git@github.com:dhivyarrk/webstore.git 
+```
+git clone git@github.com:dhivyarrk/cloudservice.git
+```
 
 2.2 Clean migration folder if already present: 
 
+```
 cd webstore 
 
 rm -rf migrations 
+```
 
 2.3 Initiate db and run migrations for database: 
 
+```
 flask --app=backend db init 
 flask --app=backend db migrate 
 flask --app=backend db upgrade 
+```
 
 2.4 change config to use local postgres db: 
 
 a. uncomment this line in config.py: 
 
-https://github.com/dhivyarrk/webstore/blob/main/backend/config.py#L4 
+https://github.com/dhivyarrk/cloudservice/blob/main/backend/backend/config.py#L4
 
 b. comment this line: 
 
-https://github.com/dhivyarrk/webstore/blob/main/backend/config.py#L5 
+https://github.com/dhivyarrk/cloudservice/blob/main/backend/backend/config.py#L5
 
 2.5 Run the application: 
 
-flask –app=backend run 
+```
+flask –app=backend run or
 
+python -m flask --app=backend run
+```
 
 
 3. For frontend server: 
 
-3.1 Clone repository: 
+3.1 Change env.ts to connect to local backend server: 
 
-git clone git@github.com:dhivyarrk/fullstackfrontendapp.git 
+```
+cd frontend 
+```
 
- 3.2 Change env.ts to connect to local backend server: 
+Change to local or hosted server according to needs:
 
-cd fullstackfrontendapp 
+https://github.com/dhivyarrk/cloudservice/blob/main/frontend/src/app/env.ts#L1
 
-a. uncomment local server https://github.com/dhivyarrk/fullstackfrontendapp/blob/main/src/app/env.ts#L1 
 
-d. comment the online deployment server https://github.com/dhivyarrk/fullstackfrontendapp/blob/main/src/app/env.ts#L2 
+3.2 run server: 
 
-3.3. run server: 
-
+```
 ng serve 
+```
 
-(if there are any issues please remove node-modules (rm -rf node-modules) and package-lock.json(rm package-lock.json) and run again) 
+(if there are any issues please remove node-modules (rm -rf node-modules) and package-lock.json(rm package-lock.json) and run again) . Also use npm install to install modules if it wasn't installed.
 
  
 
@@ -170,9 +191,10 @@ As an admin:
 
 How to run with Docker:
 
+```
 cd cloudservice/backend
-
 
 docker build -t flask-app .
 
 docker run -p 5000:5000 flask-app
+```

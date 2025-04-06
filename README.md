@@ -166,3 +166,13 @@ As an admin:
 6. Can list, add, modify kid’s shoes 
 
 7. Can logout of the service. 
+
+
+How to run with Docker:
+
+cd cloudservice/backend
+
+
+docker build -t flask-app .
+
+docker run -p 5000:5000 flask-app

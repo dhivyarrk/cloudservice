@@ -26,6 +26,14 @@ def upgrade():
     sa.PrimaryKeyConstraint('category_id'),
     sa.UniqueConstraint('category_id')
     )
+    op.execute("""
+        INSERT INTO categories (category_id, category_name, category_description)
+        VALUES
+        (1, 'womensclothes', 'This is womens clothes'),
+        (2, 'womensaccessories', 'This is womens accesories'),
+        (3, 'kidsclothes', 'This is kids clothes'),
+        (4, 'kidsshoes', 'This is kids shoes');
+    """)
     op.create_table('users',
     sa.Column('user_id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('user_name', sa.String(), nullable=False),

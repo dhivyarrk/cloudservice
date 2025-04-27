@@ -6,6 +6,7 @@ from flask_restful import Resource, Api
 from flask import Flask, session, redirect, url_for, request
 from werkzeug.security import generate_password_hash
 from urllib.parse import urlencode, quote
+from prometheus_flask_exporter import PrometheusMetrics
 
 from backend.database import db
 from backend.models.webstoremodels import User, WomensProducts, KidsProducts, Categories, Orders, Shipments
@@ -23,6 +24,8 @@ import datetime
 
 def create_app():
     app = Flask(__name__)
+    # Initialize Prometheus metrics exporter
+    metrics = PrometheusMetrics(app)
 
     #app.config.from_mapping(
     #    SECRET_KEY = "your_secret_key_here"
@@ -39,6 +42,15 @@ def create_app():
     app.config['SESSION_PERMANENT'] = True    # Optional: set to True if sessions should persist across browser restarts
     Session(app)
     app.config.from_object(DbConfig)
+    #app.register_blueprint(auth_blueprint, url_prefix="/api")
+#user_api = Api(user_bp)
+
+    #CORS(app, supports_credentials=True, origins=["http://127.0.0.1:4200", "http://localhost:4200/"])
+    # Allow all - testing purposes
+    #CORS(app, supports_credentials=True, origins="*")
+    CORS(app, supports_credentials=True, origins="https://booboofashions.com/")
+
+    '''
     CORS(app, supports_credentials=True, origins=["https://booboofashions.netlify.app"])
     #CORS(app, supports_credentials=True, origins=["http://127.0.0.1:4200", "http://localhost:4200/"])
     #CORS(app, supports_credentials=True, origins="https://booboofashions.netlify.app/")
@@ -56,24 +68,24 @@ def create_app():
     server_metadata_url=os.getenv('server_metadata_url')
     )
 
-
+    '''
     db.init_app(app)
 
     migrate = Migrate(app, db)
     from backend.models.webstoremodels import User, WomensProducts, KidsProducts, Categories, Orders, Shipments
     api=Api(app)
-    api.add_resource(UserList, '/users')
-    api.add_resource(UserSignup, '/signup')
-    api.add_resource(SessionCheckResource, '/session-check')
-    api.add_resource(UserSignin, '/signin')
+    api.add_resource(UserList, '/api/users')
+    api.add_resource(UserSignup, '/api/signup')
+    api.add_resource(SessionCheckResource, '/api/session-check')
+    api.add_resource(UserSignin, '/api/signin')
     api.add_resource(WomensclothesList, '/womensclothes')
-    api.add_resource(Womensclothes,  '/womensclothes/<string:product_id>', methods=['DELETE', 'PUT'])
-    api.add_resource(WomensaccessoriesList, '/womensaccessories')
-    api.add_resource(Womensaccessories,  '/womensaccessories/<string:product_id>', methods=['DELETE', 'PUT'])
-    api.add_resource(KidsclothesList, '/kidsclothes')
-    api.add_resource(Kidsclothes,  '/kidsclothes/<string:product_id>', methods=['DELETE', 'PUT'])
-    api.add_resource(KidsshoesList, '/kidsshoes')
-    api.add_resource(Kidsshoes,  '/kidsshoes/<string:product_id>', methods=['DELETE', 'PUT'])
+    api.add_resource(Womensclothes,  '/api/womensclothes/<string:product_id>', methods=['DELETE', 'PUT'])
+    api.add_resource(WomensaccessoriesList, '/api/womensaccessories')
+    api.add_resource(Womensaccessories,  '/api/womensaccessories/<string:product_id>', methods=['DELETE', 'PUT'])
+    api.add_resource(KidsclothesList, '/api/kidsclothes')
+    api.add_resource(Kidsclothes,  '/api/kidsclothes/<string:product_id>', methods=['DELETE', 'PUT'])
+    api.add_resource(KidsshoesList, '/api/kidsshoes')
+    api.add_resource(Kidsshoes,  '/api/kidsshoes/<string:product_id>', methods=['DELETE', 'PUT'])
 
     @app.route('/login')
     def login():

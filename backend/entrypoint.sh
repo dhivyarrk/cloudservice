@@ -3,7 +3,10 @@
 echo "Waiting for PostgreSQL to be ready..."
 
 # Wait until the Postgres container is reachable
-while ! nc -z db 5432; do
+# while ! nc -z db 5432; do
+# use my-stack_db for docker swarm deployment as docker swarm 
+# prefix stack name to service and it cannot be avoided 
+while ! nc -z my-stack_db 5432; do
   sleep 1
 done
 

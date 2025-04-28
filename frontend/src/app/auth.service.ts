@@ -39,6 +39,16 @@ logout(): void {
   localStorage.removeItem('user_type'); // Assuming token is stored in localStorage
   localStorage.removeItem('cartItems'); // Assuming token is stored in localStorage
   sessionStorage.clear(); // Optionally clear session storage
+  this.http.get(`${API_URL}/logout`).subscribe({
+    next: (response) => {
+      console.log('Logged out successfully', response);
+      // Redirect the user manually after logout
+      this.router.navigate(['/']); // or to '/login' or some landing page
+    },
+    error: (err) => {
+      console.error('Logout failed', err);
+    }
+  });
 }
 /*
 handleoauthcallback(): Observable<any> {

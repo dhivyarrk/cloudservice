@@ -184,11 +184,13 @@ def create_app():
         #return redirect('http://localhost:4200/dashboard')
         """
 
-    @app.route('/logout')
+    @app.route('/api/logout')
     def logout():
+        print("in user logout")
         session.pop('user', None)
         #return redirect('https://booboofashions.netlify.app/dashboard/')
         #return redirect('http://localhost:4200/dashboard')
-        return redirect('https://booboofashions.netlify.app/dashboard')
+        #return redirect('https://booboofashions.netlify.app/dashboard')
+            return jsonify({"message": "Logged out successfully."}), 200
 
     return app

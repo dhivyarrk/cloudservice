@@ -191,6 +191,7 @@ def create_app():
         #return redirect('https://booboofashions.netlify.app/dashboard/')
         #return redirect('http://localhost:4200/dashboard')
         #return redirect('https://booboofashions.netlify.app/dashboard')
-            return jsonify({"message": "Logged out successfully."}), 200
+        return jsonify({"message": "Logged out successfully."})
+        #return jsonify({"error": str(e)})
 
     return app

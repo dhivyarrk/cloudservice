@@ -78,7 +78,7 @@ def create_app():
     api.add_resource(UserSignup, '/api/signup')
     api.add_resource(SessionCheckResource, '/api/session-check')
     api.add_resource(UserSignin, '/api/signin')
-    api.add_resource(WomensclothesList, '/womensclothes')
+    api.add_resource(WomensclothesList, '/api/womensclothes')
     api.add_resource(Womensclothes,  '/api/womensclothes/<string:product_id>', methods=['DELETE', 'PUT'])
     api.add_resource(WomensaccessoriesList, '/api/womensaccessories')
     api.add_resource(Womensaccessories,  '/api/womensaccessories/<string:product_id>', methods=['DELETE', 'PUT'])

@@ -7,6 +7,8 @@ from flask import Flask, session, redirect, url_for, request
 from werkzeug.security import generate_password_hash
 from urllib.parse import urlencode, quote
 from prometheus_flask_exporter import PrometheusMetrics
+from prometheus_client import make_wsgi_app
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
 from backend.database import db
 from backend.models.webstoremodels import User, WomensProducts, KidsProducts, Categories, Orders, Shipments
@@ -24,8 +26,11 @@ import datetime
 
 def create_app():
     app = Flask(__name__)
-    # Initialize Prometheus metrics exporter
-    metrics = PrometheusMetrics(app)
+    # Initialize Prometheus metrics exporter (return content: html instead of text)
+    # metrics = PrometheusMetrics(app)
+    app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
+        "/metrics": make_wsgi_app()
+    })
 
     #app.config.from_mapping(
     #    SECRET_KEY = "your_secret_key_here"

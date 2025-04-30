@@ -17,7 +17,7 @@ HTTPS: Acme lets encrypt
 Monitoring: Prometheus, Grafana
 Logging: loki, promtail.
 
-**Documentation: **
+**Documentation:**
 
 Service name: Web-Store Application
 
@@ -27,7 +27,7 @@ Detailed description
 
 Kid’s clothes, kid’s shoes, women’s clothes and women’s accessories are sold in this website. Customer's can login through third party sso (single-sign-on) or create account, browse inventory,  add items to their cart, checkout, pay through card or cash on delivery. 
 
-**User manual: **
+**User manual:**
 
 Important Features: 
 
@@ -68,7 +68,7 @@ As an admin:
 7. Can logout of the service. 
 
 
-** Installation instructions:  **
+**Installation instructions:**
 
 Few ways to install:
 
@@ -162,6 +162,7 @@ python -m flask --app=backend db upgrate
 ```
 
 sample insert:
+```
 
 INSERT INTO categories (category_id, category_name, category_description)
 VALUES
@@ -184,6 +185,7 @@ VALUES
 (1, 'kc1', 'jdks', 30, 3, 20),
 (3, 'ks1', 'njdsbc', 10, 4, 200),
 (4, 'ks2', 'njdsbcdnjk', 40, 4, 2000);
+```
 
 
 2.4 change config to use local postgres db: 
@@ -269,6 +271,8 @@ docker compose down
 
 ***Installation Method 4 - Install in Digital ocean with docker swarm***
 
+It is now deploed in https://booboofashions.com
+
 Reference: https://github.com/Japskua/cloud_services_and_infra_2025
 
 Create 2 Droplets manager and worker for docker swarm and add necessary firewall rules(Refer: https://github.com/Japskua/cloud_services_and_infra_2025/tree/main/session_7)
@@ -318,6 +322,10 @@ htpasswd -nbB metricsuser password | tr -d '\n' > backend_metrics_users
 docker secret create backend_metrics_users backend_metrics_users
 ```
 
+For Acme lets encrypt certificate:
+
+Add digtal ocean nameservers to the custom domain name(booboofashions.com) so that digital ocean can manage DNS records. Acme lets encrypt certificate is generated. 
+
 
 CI/CD workflows:
 
@@ -346,14 +354,16 @@ docker secret create ghcrregcred ~/.docker/config.json
 ```
 
 
-Add new URLs to your DNS server. These are:
+Add new URLs to DNS. These are:
 
+```
 
 prometheus.booboofashions.com
 grafana.booboofashions.com
 loki.booboofashions.com
 frontend.booboofashions.com
 backend.booboofashions.com
+```
 
 
 Create configs
@@ -390,8 +400,6 @@ docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all
 
 Deploy:
 
-
-```
 ssh to manager droplet and deploy the stack
 
 ```

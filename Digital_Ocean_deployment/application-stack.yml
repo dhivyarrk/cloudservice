@@ -1,0 +1,113 @@
+services:
+    backend:
+        image: ghcr.io/dhivyarrk/project-backend:main
+        networks:
+            - app_network
+        environment:
+            - FLASK_APP=backend
+            - FLASK_ENV=production
+            - DATABASE_URL=postgresql://user:password@my-stack_db:5432/mydb
+            #- POSTGRES_URL=postgres://user:password@postgres:5432/projectdb # This is the database URL
+            #- JWT_SECRET=secret # We want to set the JWT_SECRET in the environment variables. This must match the one in auth and backend!
+            - TZ=Europe/Helsinki
+        deploy:
+            mode: replicated
+            replicas: 1
+            placement:
+              constraints:
+                - node.role == worker
+            restart_policy:
+              condition: on-failure
+              delay: 5s
+              max_attempts: 3
+            labels:
+              - "traefik.enable=true"
+              - "traefik.http.routers.backend.rule=Host(`booboofashions.com`) && PathPrefix(`/api`)" # Remember to change URL
+              - "traefik.http.routers.backend.entrypoints=websecure"
+              - "traefik.http.routers.backend.tls=true"
+              - "traefik.http.services.backend.loadbalancer.server.port=5000"
+              - "traefik.http.routers.backend.tls.certresolver=myresolver"
+              # 🔥 Metrics route (NEW)
+              - "traefik.http.routers.backend-metrics.rule=Host(`booboofashions.com`) && Path(`/metrics`)"
+              - "traefik.http.routers.backend-metrics.entrypoints=websecure"
+              - "traefik.http.routers.backend-metrics.tls=true"
+              - "traefik.http.routers.backend-metrics.tls.certresolver=myresolver"
+              - "traefik.http.routers.backend-metrics.service=backend"
+              - "traefik.http.routers.backend-metrics.middlewares=metrics-auth"
+              - "traefik.http.middlewares.metrics-auth.basicauth.usersfile=/run/secrets/backend_metrics_users"
+
+        secrets:
+          - ghcrregcred
+          - backend_metrics_users
+    frontend:
+        image: ghcr.io/dhivyarrk/project-frontend:main
+        networks:
+            - app_network
+        environment:
+            #- JWT_SECRET=secret # We want to set the JWT_SECRET in the environment variables. This must match the one in auth and backend!
+            - TZ=Europe/Helsinki
+        deploy:
+            mode: replicated
+            replicas: 1
+            placement:
+              constraints:
+                - node.role == worker
+            restart_policy:
+              condition: on-failure
+              delay: 5s
+              max_attempts: 3
+            labels:
+              - "traefik.enable=true"
+              - "traefik.http.routers.frontend.rule=Host(`booboofashions.com`) && PathPrefix(`/`)" # Remember to change this!
+              - "traefik.http.routers.frontend.entrypoints=websecure"
+              - "traefik.http.routers.frontend.tls=true"
+              - "traefik.http.services.frontend.loadbalancer.server.port=80"
+              - "traefik.http.routers.frontend.tls.certresolver=myresolver"
+        secrets:
+          - ghcrregcred
+
+    db:
+        image: public.ecr.aws/docker/library/postgres:15
+        networks:
+            - app_network
+        environment:
+            - TZ=Europe/Helsinki
+            - POSTGRES_USER=user
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=mydb
+        volumes:
+            - "postgres_data:/var/lib/postgresql/data"
+            - "db_init:/db_init"
+        healthcheck: # Hey! We are checking that the postgres is up and running!
+            test: ["CMD-SHELL", "pg_isready -U user -d mydb"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+        deploy:
+            mode: replicated
+            replicas: 1
+            placement:
+              constraints:
+                - node.role == worker
+            restart_policy:
+              condition: on-failure
+              delay: 5s
+              max_attempts: 3
+
+secrets:
+  ghcrregcred:
+    external: true
+  metrics_users:
+      external: true
+
+networks:
+  app_network:
+    external: true
+
+volumes:
+  postgres_data:
+    external: true
+  db_init:
+    external: true
+
+

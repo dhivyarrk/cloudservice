@@ -389,6 +389,8 @@ dockeruser@lut-project-swarm-worker-1:~$ docker volume create alertmanager_data
 docker volume create grafana_data
 docker volume create grafana_provisioning
 docker volume create loki_data
+docker volume create portainer_data
+docker volume create letsencrypt
 ```
 
 Add plugins on all nodes:

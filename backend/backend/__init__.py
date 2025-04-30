@@ -27,10 +27,10 @@ import datetime
 def create_app():
     app = Flask(__name__)
     # Initialize Prometheus metrics exporter (return content: html instead of text)
-    # metrics = PrometheusMetrics(app)
-    app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
-        "/metrics": make_wsgi_app()
-    })
+    metrics = PrometheusMetrics(app)
+    #app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
+    #    "/metrics": make_wsgi_app()
+    #})
 
     #app.config.from_mapping(
     #    SECRET_KEY = "your_secret_key_here"

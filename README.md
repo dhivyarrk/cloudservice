@@ -1,31 +1,28 @@
-**Instruction**
+***Webapplication Link:*** https://booboofashions.com
 
 **Source code**
 
-Backend code: https://github.com/dhivyarrk/cloudservice/tree/main/backend
+*Backend code:* https://github.com/dhivyarrk/cloudservice/tree/main/backend
 
-Frontend code: https://github.com/dhivyarrk/cloudservice/tree/main/frontend
-
+*Frontend code:* https://github.com/dhivyarrk/cloudservice/tree/main/frontend
 
 **Project architecture:**
 
-Frontend: Angular served via nginx
-Backend: flask, alembic for migration, sqlalchemy - ORM wrapper
-Database: postgres
-Load Balancer - Traefik
-HTTPS: Acme lets encrypt
-Monitoring: Prometheus, Grafana
-Logging: loki, promtail.
+Frontend: Angular served via nginx<br>
+Backend: flask, alembic for migration, sqlalchemy - ORM wrapper<br>
+Database: postgres<br>
+Load Balancer - Traefik<br>
+HTTPS: Acme lets encrypt<br>
+Monitoring: Prometheus, Grafana<br>
+Logging: loki, promtail.<br>
 
 **Documentation:**
 
-Service name: Web-Store Application
+*Service name:* Web-Store Application
 
-Description of the service: Online web store where customer's can purchase kid’s clothes, kid’s shoes, women’s clothes and women’s accessories. 
+*Description of the service:* Online web store where customer's can purchase kid’s clothes, kid’s shoes, women’s clothes and women’s accessories. 
 
-Detailed description 
-
-Kid’s clothes, kid’s shoes, women’s clothes and women’s accessories are sold in this website. Customer's can login through third party sso (single-sign-on) or create account, browse inventory,  add items to their cart, checkout, pay through card or cash on delivery. 
+*Detailed description:* Kid’s clothes, kid’s shoes, women’s clothes and women’s accessories are sold in this website. Customer's can login through third party sso (single-sign-on) or create account, browse inventory,  add items to their cart, checkout, pay through card or cash on delivery. 
 
 **User manual:**
 
@@ -70,7 +67,7 @@ As an admin:
 
 **Installation instructions:**
 
-Few ways to install:
+*Few ways to install:*
 
 1. Install locally - separate installation of frontend, backend and database
 2. Dockerize and install (locally)
